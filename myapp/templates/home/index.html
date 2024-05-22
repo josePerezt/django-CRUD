@@ -1,0 +1,10 @@
+{%extends 'base.html'%} {% load static %}
+
+<!-- title head -->
+{% block title %} home {% endblock %}
+
+<!-- body -->
+
+{% block content%} {% if user.is_authenticated %}
+<h1>Bienvenido {{user.username}}</h1>
+{% endif %} {% endblock %}
