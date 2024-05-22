@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from .forms import Login,Register
+from .forms import Login,Register,CreateTask
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
@@ -8,9 +8,14 @@ from django.contrib import messages
 from django.db import IntegrityError
 # Create your views here.
 
+# Bienvenida
+def welcome(request):
+  return render(request,"welcome/index.html")
+
+
 # Register de mi app
 def signup(request):
-  print(request.POST)
+
   if request.method == "POST":
     usename = request.POST["username"]
     password1 = request.POST["password1"]
@@ -62,3 +67,12 @@ def home(request):
 def signout(request):
   logout(request)
   return redirect("login")
+
+
+def task(request):
+  return render(request,"task/index.html")
+
+def createTask(request):
+  return render(request,"create_task/index.html",{
+    "form":CreateTask
+  })

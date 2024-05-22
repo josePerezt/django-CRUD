@@ -1,6 +1,7 @@
 from typing import Any
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
-
+from django.forms import ModelForm
+from .models import Task
 class Login(AuthenticationForm):
   def __init__(self, *args ,**kwargs):
     super().__init__( *args, **kwargs)
@@ -33,3 +34,10 @@ class Register(UserCreationForm):
     self.fields["username"].label = ""
     self.fields["password1"].label = ""
     self.fields["password2"].label = ""
+    
+
+class CreateTask(ModelForm):
+  class Meta:
+    model= Task
+    fields=["title","description","important"]
+  

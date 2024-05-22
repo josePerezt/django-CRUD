@@ -1,0 +1,10 @@
+{% extends 'base.html'%}{% load static %}
+
+<!-- head -->
+{% block title %}Bienvenida{% endblock %}
+<!-- body -->
+{% block content %}
+<h1>Bienvenida/o</h1>
+<a href="{% url 'login'%}">login</a>
+<a href="{% url 'signup'%}">Signup</a>
+{% endblock %}
