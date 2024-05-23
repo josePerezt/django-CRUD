@@ -4,6 +4,18 @@
 
 <!-- body -->
 {% block content %}
-<h1>tareas</h1>
+<h1>{{user.username}}</h1>
+
+{% if tasks %}
+<h2>Tienes las siguientes tareas por realizar:</h2>
+<ul>
+  {% for task in tasks %}
+  <li>{{task}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<h2>Aun no tienes tareas por realizar</h2>
+{% endif %}
+<a href="{% url 'create_task' %}">Agregar tareas</a>
 
 {% endblock %}

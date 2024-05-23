@@ -5,9 +5,20 @@
 <!-- body -->
 
 {% block content %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <h1>Form task</h1>
 <form action="{% url 'create_task' %}" method="post">
-  {% csrf_token %}
-  {{form.as_p}}</form>
+  {% csrf_token %} {{form.as_p}}
+  <button type="submit">Agregar</button>
+</form>
+
+<a href="{% url 'task' %}"> Ir a Tareas </a>
 
 {% endblock %}
