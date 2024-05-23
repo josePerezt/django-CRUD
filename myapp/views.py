@@ -74,5 +74,5 @@ def task(request):
 
 def createTask(request):
   return render(request,"create_task/index.html",{
-    "form":CreateTask
+    "form":CreateTask()
   })

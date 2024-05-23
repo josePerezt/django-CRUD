@@ -6,4 +6,8 @@
 
 {% block content %}
 <h1>Form task</h1>
+<form action="{% url 'create_task' %}" method="post">
+  {% csrf_token %}
+  {{form.as_p}}</form>
+
 {% endblock %}
