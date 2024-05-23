@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% load static %}
+
+<!-- head -->
+{% block title%}Detalle{% endblock %}
+
+<!-- body -->
+
+{% block content %}
+<h1>detalle de tarea</h1>
+<p>{{description}}</p>
+<a href="{% url 'task' %}">Ir a tareas </a>
+{% endblock %}

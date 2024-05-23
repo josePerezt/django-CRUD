@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .forms import Login,Register,CreateTask
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -71,12 +71,18 @@ def signout(request):
 
 @login_required
 def task(request):
-  user_active = request.user.id
-  task_user = Task.objects.filter(user_id=user_active)
+  user_active = request.user
+  task_user = Task.objects.filter(user=user_active)
   return render(request,"task/index.html",{
     "tasks":task_user
   })
 
+@login_required
+def task_detail(request,task_id):
+  print(task_id)
+  task = get_object_or_404(Task,pk=task_id)
+  print(task.description)
+  return render(request,"detail_task/index.html",{"task_id":task_id, "description": task.description})
 
 @login_required
 def createTask(request):

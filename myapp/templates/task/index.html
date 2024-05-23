@@ -10,7 +10,11 @@
 <h2>Tienes las siguientes tareas por realizar:</h2>
 <ul>
   {% for task in tasks %}
-  <li>{{task}}</li>
+  <li>
+    <a href="{% url 'task_detail' task.id %}">
+      <h2>{{task.title}}</h2>
+    </a>
+  </li>
   {% endfor %}
 </ul>
 {% else %}
