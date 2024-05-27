@@ -79,16 +79,15 @@ def task(request):
 
 @login_required
 def task_detail(request,task_id):
-  print(task_id)
   task = get_object_or_404(Task,pk=task_id)
-  print(task.description)
   return render(request,"detail_task/index.html",{"task_id":task_id, "description": task.description})
+
 
 @login_required
 def createTask(request):
   if request.method == "POST":
     try:
-       # le pasamos los datos ingresado atraves del form al mismo form para que no guarde los datos
+       # le pasamos los datos ingresado atraves del mismo form para que nos guarde los datos
       data = CreateTask(request.POST)
     
     # le indicamos que nos guarde los datos con su metodo save()  y le pasamos el parametro commit igualado a false.
@@ -108,7 +107,12 @@ def createTask(request):
       return render(request,"create_task/index.html",{
       "form":CreateTask()
   })
-  else:
+  else:  
     return render(request,"create_task/index.html",{
       "form":CreateTask()
   })
+    
+@login_required  
+def update_task(request,task_id):
+  print(task_id)
+  return render(request,"update_task/index.html")   

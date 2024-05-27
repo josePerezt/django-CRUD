@@ -11,8 +11,12 @@
 <ul>
   {% for task in tasks %}
   <li>
+    <h2>{{task.title}}</h2>
     <a href="{% url 'task_detail' task.id %}">
-      <h2>{{task.title}}</h2>
+      <p>detalle</p>
+    </a>
+    <a href="{% url 'update_task' task.id %}">
+      <p>modificar</p>
     </a>
   </li>
   {% endfor %}
