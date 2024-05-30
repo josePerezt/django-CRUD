@@ -74,6 +74,7 @@ def signout(request):
 def task(request):
   user_active = request.user
   task_user = Task.objects.filter(user=user_active)
+  print(task_user)
   return render(request,"task/index.html",{
     "tasks":task_user
   })
@@ -127,6 +128,7 @@ def update_task(request,task_id):
 
 @login_required
 def task_delete(request,task_id):
+  print(request)
   task = get_object_or_404(Task, pk=task_id)
   task.delete()
   return redirect("task")
@@ -137,6 +139,11 @@ def task_completed(request,task_id):
   task.datecompleted = timezone.now()
   task.save()
   return redirect("task")
-    
+
+
+@login_required
+def tasks_completed_list(request):
+  tasks = Task.objects.filter(user=request.user)
+  return render(request,"task_completed/index.html",{"tasks":tasks})
   
   

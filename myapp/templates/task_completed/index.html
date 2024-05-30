@@ -8,26 +8,24 @@
 
 {% if tasks %}
 
-<h2>Tienes las siguientes tareas por realizar:</h2>
+<h2>Tareas completadas:</h2>
 <ul>
   <!-- Recorremos las tareas -->
   {% for task in tasks %}
   <!-- Renderizamos aquellas que no están completadas -->
-  {% if not task.datecompleted %}
+  {% if task.datecompleted %}
   <li>
     <h2>{{ task.title }}</h2>
     <a href="{% url 'task_detail' task.id %}"><p>detalle</p></a>
     <a href="{% url 'update_task' task.id %}"><p>modificar</p></a>
     <a href="{% url 'task_delete' task.id %}"><p>Eliminar</p></a>
-    <a href="{% url 'task_completed' task.id %}">Completar</a>
   </li>
   {% endif %} {% endfor %}
 </ul>
 {% else %}
-<h2>No hay tareas pendiente</h2>
+<h2>No hay tareas para completar</h2>
 {% endif %}
 
-<a href="{% url 'create_task' %}">Agregar tareas</a>
-<a href="{% url 'tasks_completed_list' %}">Tareas completadas</a>
+<a href="{% url 'task' %}">tareas pendientes</a>
 
 {% endblock %}
