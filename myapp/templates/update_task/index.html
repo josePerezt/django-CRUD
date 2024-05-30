@@ -6,6 +6,12 @@
 <!-- body -->
 
 {% block content %}
-<h1>Actualizar tarea</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  <h1>Actualizar tarea</h1>
+  {{form}}
+  <button>Actualizar</button>
+</form>
+
 <a href="{% url 'task' %}">tareas</a>
 {% endblock %}

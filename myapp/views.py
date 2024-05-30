@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import IntegrityError
 from .models import Task
+from django.utils import timezone
 # Create your views here.
 
 # Bienvenida
@@ -114,5 +115,28 @@ def createTask(request):
     
 @login_required  
 def update_task(request,task_id):
-  print(task_id)
-  return render(request,"update_task/index.html")   
+  if request.method == "POST":
+    task = get_object_or_404(Task,pk=task_id)
+    form =CreateTask(request.POST,instance=task)
+    form.save()
+    return redirect("task")   
+  else:
+    task = get_object_or_404(Task,pk=task_id)
+    form = CreateTask(instance=task)
+    return render(request,"update_task/index.html",{"form":form})   
+
+@login_required
+def task_delete(request,task_id):
+  task = get_object_or_404(Task, pk=task_id)
+  task.delete()
+  return redirect("task")
+  
+@login_required
+def task_completed(request,task_id):
+  task = get_object_or_404(Task,pk=task_id)
+  task.datecompleted = timezone.now()
+  task.save()
+  return redirect("task")
+    
+  
+  
