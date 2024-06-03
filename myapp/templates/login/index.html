@@ -8,19 +8,29 @@
 
 <!-- body -->
 {% block content%}
-<h1>inicio de sesion</h1>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-<form action="{% url 'login' %}" method="post">{% csrf_token %} {{form.as_p}}
+<div class="containerW">
 
-  <button type="submit">Iniciar sesion</button>
-</form>
-  <a href="{% url 'signup' %}">Registrarse</a>
+  <div class="containerForm">
 
+    <h1>inicio de sesion</h1>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post" class="form">{% csrf_token %} {{form.as_p}}
+      
+      <button type="submit" class="buttonL">Iniciar sesion</button>
+    </form>
 
+    <div class="link">
+
+      <a href="{% url 'signup' %}">Registrarse</a>
+    </div>
+    
+    
+  </div>
+</div>
 {% endblock %}

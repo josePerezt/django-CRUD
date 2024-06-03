@@ -4,7 +4,13 @@
 {% block title %}Bienvenida{% endblock %}
 <!-- body -->
 {% block content %}
-<h1>Bienvenida/o</h1>
-<a href="{% url 'login'%}">login</a>
-<a href="{% url 'signup'%}">Signup</a>
+<div class="containerW">
+  <h1>Bienvenido Django CRUD</h1>
+  <div class="btn">
+    <a href="{% url 'login'%}">login</a>
+  </div>
+  <div class="btn">
+    <a href="{% url 'signup'%}">Signup</a>
+  </div>
+</div>
 {% endblock %}

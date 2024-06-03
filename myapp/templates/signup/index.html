@@ -7,20 +7,28 @@
 <!-- body -->
 
 {% block content%}
+<div class="containerW">
 
-<h1>registro</h1>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  <div class="containerForm">
+    <h1>Registro</h1>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
-</ul>
+      </ul>
 {% endif %}
-<form action="{% url 'logout' %}" method="post">
+
+<form action="{% url 'logout' %}" method="post" class="form">
   {% csrf_token %} {{form.as_p}}
-  <button type="submit">Registrarse</button>
+  <button type="submit" class="buttonL">Registrarse</button>
 </form>
-<a href="{% url 'login' %}">Iniciar Sesion</a>
+
+    <div class="link">
+      <a href="{% url 'login' %}">Iniciar Sesion</a>
+    </div>
 
 
+</div>
+</div>
 {% endblock %}

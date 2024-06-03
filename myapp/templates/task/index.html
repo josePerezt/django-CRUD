@@ -3,31 +3,44 @@
 {% block title %} Tareas {% endblock %}
 
 <!-- body -->
-{% block content %}
-<h1>{{ user.username }}</h1>
-
-{% if tasks %}
-
-<h2>Tienes las siguientes tareas por realizar:</h2>
-<ul>
-  <!-- Recorremos las tareas -->
-  {% for task in tasks %}
-  <!-- Renderizamos aquellas que no están completadas -->
-  {% if not task.datecompleted %}
-  <li>
-    <h2>{{ task.title }}</h2>
-    <a href="{% url 'task_detail' task.id %}"><p>detalle</p></a>
-    <a href="{% url 'update_task' task.id %}"><p>modificar</p></a>
-    <a href="{% url 'task_delete' task.id %}"><p>Eliminar</p></a>
-    <a href="{% url 'task_completed' task.id %}">Completar</a>
-  </li>
-  {% endif %} {% endfor %}
-</ul>
-{% else %}
-<h2>No hay tareas pendiente</h2>
+{% block content %} {% if user.is_authenticated %}
+<div class="btnL">
+  <a href="/logout">logout</a>
+</div>
 {% endif %}
+<div class="containerTask">
+  <h1 class="username">Hola! {{ user.username }}</h1>
 
-<a href="{% url 'create_task' %}">Agregar tareas</a>
-<a href="{% url 'tasks_completed_list' %}">Tareas completadas</a>
+  {% if tasks %}
 
+  <h2>Tienes las siguientes tareas por realizar:</h2>
+  <ul>
+    <!-- Recorremos las tareas -->
+    {% for task in tasks %}
+    <!-- Renderizamos aquellas que no están completadas -->
+    {% if not task.datecompleted %}
+    <li class="card">
+      <div class="titleTask">
+        <h3>{{ task.title }}</h3>
+      </div>
+      <div class="containerOp">
+        <a href="{% url 'task_detail' task.id %}" class="option">Detalle</a>
+        <a href="{% url 'update_task' task.id %}" class="option">Modificar</a>
+        <a href="{% url 'task_delete' task.id %}" class="option">Eliminar</a>
+        <a href="{% url 'task_completed' task.id %}" class="option"
+          >Completar</a
+        >
+      </div>
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  {% else %}
+  <h2>No hay tareas pendiente</h2>
+  {% endif %}
+
+  <div class="links">
+    <a href="{% url 'create_task' %}">Agregar tareas</a>
+    <a href="{% url 'tasks_completed_list' %}">Tareas completadas</a>
+  </div>
+</div>
 {% endblock %}
