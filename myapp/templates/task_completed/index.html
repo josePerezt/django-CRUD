@@ -3,29 +3,38 @@
 {% block title %} Tareas {% endblock %}
 
 <!-- body -->
-{% block content %}
-<h1>{{ user.username }}</h1>
-
-{% if tasks %}
-
-<h2>Tareas completadas:</h2>
-<ul>
-  <!-- Recorremos las tareas -->
-  {% for task in tasks %}
-  <!-- Renderizamos aquellas que no están completadas -->
-  {% if task.datecompleted %}
-  <li>
-    <h2>{{ task.title }}</h2>
-    <a href="{% url 'task_detail' task.id %}"><p>detalle</p></a>
-    <a href="{% url 'update_task' task.id %}"><p>modificar</p></a>
-    <a href="{% url 'task_delete' task.id %}"><p>Eliminar</p></a>
-  </li>
-  {% endif %} {% endfor %}
-</ul>
-{% else %}
-<h2>No hay tareas para completar</h2>
+{% block content %} {% if user.is_authenticated %}
+<div class="btnL">
+  <a href="/logout">logout</a>
+</div>
 {% endif %}
+<div class="containerTask">
+  {% if tasks %}
 
-<a href="{% url 'task' %}">tareas pendientes</a>
+  <h2>Tareas completadas:</h2>
+  <ul class="containerCard">
+    <!-- Recorremos las tareas -->
+    {% for task in tasks %}
+    <!-- Renderizamos aquellas que no están completadas -->
+    {% if task.datecompleted %}
+    <li class="card">
+      <div class="titleTask">
+        <h3>{{ task.title }}</h3>
+      </div>
+      <div class="containerOp">
+        <a href="{% url 'task_detail' task.id %}" class="option">detalle</a>
+        <a href="{% url 'update_task' task.id %}" class="option">modificar</a>
+        <a href="{% url 'task_delete' task.id %}" class="option">Eliminar</a>
+      </div>
+    </li>
+    {% endif %} {% endfor %}
+  </ul>
+  {% else %}
+  <h2>No hay tareas para completar</h2>
+  {% endif %}
 
+  <div class="links">
+    <a href="{% url 'task' %}">tareas pendientes</a>
+  </div>
+</div>
 {% endblock %}

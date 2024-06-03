@@ -13,12 +13,18 @@
     {% endfor %}
 </ul>
 {% endif %}
-<h1>Form task</h1>
-<form action="{% url 'create_task' %}" method="post">
-  {% csrf_token %} {{form.as_p}}
-  <button type="submit">Agregar</button>
-</form>
+<div class="containerW">
+<div class="containerForm">
+  <h1>Crear Tarea</h1>
+  <form action="{% url 'create_task' %}" method="post">
+    {% csrf_token %} {{form.as_p}}
+    <button type="submit" class="buttonL">Agregar</button>
+  </form>
 
-<a href="{% url 'task' %}"> Ir a Tareas </a>
-
+</div>
+<div class="linkCreate">
+  <a href="{% url 'task' %}"> Ir a Tareas </a>
+</div>
+</div>
+  
 {% endblock %}

@@ -1,6 +1,6 @@
 from typing import Any
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
-from django.forms import ModelForm
+from django.forms import ModelForm,TextInput,Textarea
 from .models import Task
 
 
@@ -43,4 +43,15 @@ class CreateTask(ModelForm):
   class Meta:
     model= Task
     fields=["title","description","important"]
+    labels={
+      "important":"Important"
+    }
+    widgets = {
+            "title": TextInput(attrs={"placeholder":"Escribe tu titulo", "rows": 20}),
+            "description":Textarea(attrs={
+              "placeholder":"Escribe una descripcion...",
+              "style":"resize: none;border-radius:5px"
+            })
+        }
+    
   
